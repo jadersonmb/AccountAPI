@@ -1,4 +1,4 @@
-package com.zuka.accountAPI.model;
+package com.zuka.account.model;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.zuka.accountAPI.enums;
+package com.zuka.account.enums;
 
 public enum Sex {
 

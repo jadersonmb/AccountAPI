@@ -1,7 +1,6 @@
-package com.zuka.accountAPI.service;
+package com.zuka.account.service;
 
-import com.zuka.accountAPI.dto.AccountDTO;
-import com.zuka.accountAPI.model.Account;
+import com.zuka.account.dto.AccountDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

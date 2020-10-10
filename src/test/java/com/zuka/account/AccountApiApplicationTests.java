@@ -1,4 +1,4 @@
-package com.zuka.accountAPI;
+package com.zuka.account;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

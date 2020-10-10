@@ -1,13 +1,11 @@
-package com.zuka.accountAPI.resource;
+package com.zuka.account.resource;
 
 import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
-import com.zuka.accountAPI.dto.AccountDTO;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.logging.log4j.util.Strings;
+import com.zuka.account.dto.AccountDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.zuka.accountAPI.service.AccountService;
+import com.zuka.account.service.AccountService;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;

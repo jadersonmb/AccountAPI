@@ -1,14 +1,13 @@
-package com.zuka.accountAPI.service;
+package com.zuka.account.service;
 
 import com.zuka.account.mapper.AccountMapper;
-import com.zuka.accountAPI.dto.AccountDTO;
-import com.zuka.accountAPI.model.Account;
-import com.zuka.accountAPI.repository.AccountRepository;
-import com.zuka.accountAPI.repository.AccountSpec;
+import com.zuka.account.dto.AccountDTO;
+import com.zuka.account.model.Account;
+import com.zuka.account.repository.AccountRepository;
+import com.zuka.account.repository.AccountSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,12 +17,12 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
 
     private AccountRepository accountRepository;
+    @Autowired
     private AccountMapper mapper;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, AccountMapper mapper) {
+    public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
-        this.mapper = mapper;
     }
 
     @Override

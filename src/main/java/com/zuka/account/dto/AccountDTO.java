@@ -1,15 +1,11 @@
-package com.zuka.accountAPI.dto;
+package com.zuka.account.dto;
 
-import com.zuka.accountAPI.enums.Sex;
-import com.zuka.accountAPI.model.Adress;
+import com.zuka.account.enums.Sex;
+import com.zuka.account.model.Adress;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor

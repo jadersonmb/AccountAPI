@@ -1,11 +1,10 @@
-package com.zuka.accountAPI;
+package com.zuka.account;
 
 import com.zuka.account.mapper.AccountMapper;
-import com.zuka.accountAPI.dto.AccountDTO;
-import com.zuka.accountAPI.enums.Sex;
-import com.zuka.accountAPI.model.Account;
-import com.zuka.accountAPI.model.Adress;
-import com.zuka.accountAPI.service.AccountService;
+import com.zuka.account.dto.AccountDTO;
+import com.zuka.account.enums.Sex;
+import com.zuka.account.model.Adress;
+import com.zuka.account.service.AccountService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

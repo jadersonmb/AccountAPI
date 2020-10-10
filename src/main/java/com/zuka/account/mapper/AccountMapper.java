@@ -1,7 +1,7 @@
 package com.zuka.account.mapper;
 
-import com.zuka.accountAPI.dto.AccountDTO;
-import com.zuka.accountAPI.model.Account;
+import com.zuka.account.dto.AccountDTO;
+import com.zuka.account.model.Account;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

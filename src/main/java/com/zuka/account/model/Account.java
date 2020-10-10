@@ -1,4 +1,4 @@
-package com.zuka.accountAPI.model;
+package com.zuka.account.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -11,12 +11,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.zuka.accountAPI.enums.Sex;
+import com.zuka.account.enums.Sex;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

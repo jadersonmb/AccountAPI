@@ -1,7 +1,7 @@
-package com.zuka.accountAPI.repository;
+package com.zuka.account.repository;
 
-import com.zuka.accountAPI.dto.AccountDTO;
-import com.zuka.accountAPI.model.Account;
+import com.zuka.account.dto.AccountDTO;
+import com.zuka.account.model.Account;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;
