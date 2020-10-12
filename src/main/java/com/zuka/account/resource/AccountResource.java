@@ -5,24 +5,29 @@ import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.zuka.account.dto.AccountDTO;
 import com.zuka.account.exception.AccountException;
 import com.zuka.account.exception.Problem;
-import com.zuka.account.exception.ProblemType;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import com.zuka.account.service.AccountService;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.Valid;
 
 @RestController()
 @RequestMapping(value = "/api/account")
@@ -30,9 +35,6 @@ public class AccountResource implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private AccountService accountService;
-    @Autowired
-    private MessageSource messageSource;
-
 
     @Autowired
     private AccountResource (AccountService accountService){
@@ -77,18 +79,17 @@ public class AccountResource implements Serializable {
     }
 
     @ExceptionHandler({ AccountException.class })
-    public ResponseEntity<Object> AccountException(AccountException ex, ProblemType problemType) {
-        String messageUser = messageSource.getMessage(ex.getMessage(), null, LocaleContextHolder.getLocale());
-        Problem problem = createProblemBuild(HttpStatus.BAD_REQUEST, messageUser, problemType)
+    public ResponseEntity<Object> AccountException(AccountException ex) {
+        Problem problem = createProblemBuild(ex.getStatus(), ex.getDetails(), ex.getType(), ex.getTitle())
                 .build();
         return ResponseEntity.badRequest().body(problem);
     }
 
-    private Problem.ProblemBuilder createProblemBuild (HttpStatus status, String detail, ProblemType problemType){
+    private Problem.ProblemBuilder createProblemBuild(Integer status, String detail, String type, String title){
         return Problem.builder()
-                .status(status.value())
-                .title(problemType.getTitle())
-                .type(problemType.getUri())
-                .details(detail);
+                .status(status)
+                .details(detail)
+                .type(type)
+                .title(title);
     }
 }

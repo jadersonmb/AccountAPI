@@ -1,6 +1,7 @@
 package com.zuka.account.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,5 @@ public class Problem {
 
     private String userMessage;
     private String uri;
+    
 }

@@ -9,4 +9,6 @@ import com.zuka.account.model.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long>, JpaSpecificationExecutor<Account> {
 
+	Account findBycpf(String cpf);
+
 }
