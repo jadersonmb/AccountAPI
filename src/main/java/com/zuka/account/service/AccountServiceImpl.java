@@ -1,5 +1,7 @@
 package com.zuka.account.service;
 
+import com.zuka.account.exception.AccountException;
+import com.zuka.account.exception.ProblemType;
 import com.zuka.account.mapper.AccountMapper;
 import com.zuka.account.dto.AccountDTO;
 import com.zuka.account.model.Account;
@@ -26,32 +28,33 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDTO save(AccountDTO accountDTO) {
+    public AccountDTO save(AccountDTO accountDTO) throws AccountException{
         Account account = accountRepository.save(mapper.toAccount(accountDTO));
         return mapper.toAccountDTO(account);
     }
 
     @Override
-    public Page<AccountDTO> listAll(Pageable pageable, AccountDTO filter) {
+    public Page<AccountDTO> listAll(Pageable pageable, AccountDTO filter) throws AccountException{
         return accountRepository.findAll(AccountSpec.searchDesc(filter), pageable)
                 .map(mapper::toAccountDTO);
     }
 
     @Override
-    public void delete(AccountDTO accountDTO) {
+    public void delete(AccountDTO accountDTO) throws AccountException{
         accountRepository.delete(mapper.toAccount(accountDTO));
     }
 
     @Override
-    public AccountDTO findById(Long id) {
+    public AccountDTO findById(Long id) throws AccountException{
+        ProblemType problemType = ProblemType.USER_NOT_FOUND;
         Optional<Account> obj = accountRepository.findById(id);
         AccountDTO accountDTO = mapper
-                .toAccountDTO(obj.orElseThrow(() -> new RuntimeException("Erro Account don't exist")));
+                .toAccountDTO(obj.orElseThrow(() -> new AccountException("Erro Account don't exist", problemType)));
         return accountDTO;
     }
 
     @Override
-    public void deleteList(List<Long> ids) {
+    public void deleteList(List<Long> ids) throws AccountException {
         ids.forEach(obj -> delete(new AccountDTO(obj)));
     }
 
