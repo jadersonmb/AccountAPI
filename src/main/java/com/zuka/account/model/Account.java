@@ -56,5 +56,5 @@ public class Account implements Serializable {
 	private LocalDateTime created;
 	
 	@Embedded
-	private Adress adress;
+	private Address address;
 }

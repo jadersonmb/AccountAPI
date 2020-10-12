@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Embeddable
-public class Adress implements Serializable {
+public class Address implements Serializable {
 
 	/**
 	 * 
@@ -24,8 +24,8 @@ public class Adress implements Serializable {
 	
 	@Column(name = "postalCode")
 	private String postalCode;
-	@Column(name = "andress", length = 150)
-	private String andress;
+	@Column(name = "address", length = 150)
+	private String address;
 	@Column(name = "district", length = 45)
 	private String district;
 	@Column(name = "city", length = 100)
