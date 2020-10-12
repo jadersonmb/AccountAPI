@@ -1,8 +1,8 @@
 package com.zuka.account;
 
-import com.zuka.account.mapper.AccountMapper;
-import com.zuka.account.dto.AccountDTO;
 import com.zuka.account.enums.Sex;
+import com.zuka.account.mapper.AccountMapper;
+import com.zuka.account.model.Account;
 import com.zuka.account.model.Adress;
 import com.zuka.account.service.AccountService;
 import org.junit.jupiter.api.Test;
@@ -17,11 +17,11 @@ public class AccuntAPITest  extends AccountApiApplicationTests {
 
     @Test
     public void createNewClient() {
-        accountService.save(createAccount());
+        accountService.save(mapper.toAccountDTO(createAccount()));
     }
 
-    private AccountDTO createAccount() {
-        return AccountDTO.builder()
+    private Account createAccount() {
+        return Account.builder()
                 .name("Zuka")
                 .sex(Sex.MALE)
                 .adress(createAdress())
