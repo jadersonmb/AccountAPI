@@ -31,6 +31,9 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 Maven
+Lombok
+PostgreSQL
+H2
 ```
 # AccountAPI Swagger-ui
 ```sh
