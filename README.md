@@ -18,8 +18,7 @@ API account que tem os seguintes endpoits.
   - Implementar as regras de negocios.
   
   You can also:
-  -
-  -
+  - criar o docker.file banco postgresql
   
 ### Tech
   * [Java] - Backend with Java 11
@@ -33,4 +32,7 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 Maven
 ```
-# AccountAPI
+# AccountAPI Swagger-ui
+```sh
+http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+```
