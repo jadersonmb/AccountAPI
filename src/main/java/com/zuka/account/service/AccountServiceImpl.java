@@ -75,8 +75,8 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public AccountDTO findById(Long id) throws AccountException {
 		ProblemType problemType = ProblemType.USER_NOT_EXISTS;
-		String messageDetails = messageSource.getMessage(problemType.getMessageSource(), new Object[] {""}, LocaleContextHolder.getLocale());
 		Optional<Account> obj = accountRepository.findById(id);
+		String messageDetails = messageSource.getMessage(problemType.getMessageSource(), new Object[] {""}, LocaleContextHolder.getLocale());
 		AccountDTO accountDTO = mapper
 				.toAccountDTO(obj.orElseThrow(() -> new AccountException(HttpStatus.BAD_REQUEST.value(),
 						problemType.getTitle(), problemType.getUri(), messageDetails)));
