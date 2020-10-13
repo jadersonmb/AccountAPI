@@ -9,6 +9,5 @@ import com.zuka.account.model.Account;
 public interface AccountMapper {
 
     AccountDTO toAccountDTO(Account account);
-
-    Account toAccount(AccountDTO accountDTO);
+    Account toAccount(AccountDTO accoutDTO);
 }

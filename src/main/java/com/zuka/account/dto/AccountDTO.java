@@ -1,6 +1,7 @@
 package com.zuka.account.dto;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import com.zuka.account.enums.Sex;
 
@@ -20,14 +21,14 @@ public class AccountDTO implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private UUID id;
     private String name;
     private String cpf;
     private Sex sex;
     private String cellPhone;
     private AddressDTO address;
 
-    public AccountDTO(Long id){
+    public AccountDTO(UUID id){
         this.id = id;
     }
 
@@ -35,7 +36,7 @@ public class AccountDTO implements Serializable {
         return name;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 }

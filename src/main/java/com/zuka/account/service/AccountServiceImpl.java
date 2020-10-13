@@ -3,6 +3,7 @@ package com.zuka.account.service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -37,6 +38,17 @@ public class AccountServiceImpl implements AccountService {
 
 	private void BusinessRulesSave(AccountDTO accountDTO) throws AccountException {
 		NotSaveCPFDuplicate(accountDTO);
+		NotSaveCellPhoneDuplicate(accountDTO);
+	}
+
+	private void NotSaveCellPhoneDuplicate(AccountDTO accountDTO) {
+		ProblemType problemType = ProblemType.CELL_PHONE_ALREADY_EXISTS;
+		String messageDetails = messageSource.getMessage(problemType.getMessageSource(),
+				new Object[] { accountDTO.getCellPhone() }, LocaleContextHolder.getLocale());
+		if (Objects.nonNull(accountRepository.findByCellPhone(accountDTO.getCellPhone()))) {
+			throw new AccountException(HttpStatus.BAD_REQUEST.value(), problemType.getUri(), problemType.getTitle(),
+					messageDetails);
+		};
 	}
 
 	private void NotSaveCPFDuplicate(AccountDTO accountDTO) throws AccountException {
@@ -68,12 +80,12 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void deleteList(List<Long> ids) throws AccountException {
+	public void deleteList(List<UUID> ids) throws AccountException {
 		ids.forEach(obj -> delete(findById(obj)));
 	}
 
 	@Override
-	public AccountDTO findById(Long id) throws AccountException {
+	public AccountDTO findById(UUID id) throws AccountException {
 		ProblemType problemType = ProblemType.USER_NOT_EXISTS;
 		Optional<Account> obj = accountRepository.findById(id);
 		String messageDetails = messageSource.getMessage(problemType.getMessageSource(), new Object[] {""}, LocaleContextHolder.getLocale());

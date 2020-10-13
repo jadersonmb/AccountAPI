@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -56,20 +57,20 @@ public class AccountResource implements Serializable {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
         AccountDTO accountDTO = accountService.findById(id);
         accountService.delete(accountDTO);
         return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/deleteList/{ids}", method=RequestMethod.DELETE)
-    public ResponseEntity<?> deleteList(@PathVariable List<Long> ids) {
+    public ResponseEntity<?> deleteList(@PathVariable List<UUID> ids) {
         accountService.deleteList(ids);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody AccountDTO accountDTO) {
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody AccountDTO accountDTO) {
         AccountDTO accountSaveDTO = accountService.findById(id);
         if(Objects.nonNull(accountSaveDTO.getId())) {
             BeanUtils.copyProperties(accountDTO, accountSaveDTO, "id");

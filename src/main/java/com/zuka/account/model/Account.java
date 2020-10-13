@@ -2,6 +2,7 @@ package com.zuka.account.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -9,10 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import com.zuka.account.enums.Sex;
 
@@ -34,9 +36,19 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false)
-	private Long id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator",
+		parameters = {
+			@Parameter(
+				name = "uuid_gen_strategy_class",
+				value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+			)
+		}
+	)
+	@Column(name = "id", updatable = false, nullable = false)
+	private UUID id;
 	
 	@Column(name = "name", nullable = false)
 	private String name;
