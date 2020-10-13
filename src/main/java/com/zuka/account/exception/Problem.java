@@ -1,10 +1,13 @@
 package com.zuka.account.exception;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,5 +24,14 @@ public class Problem {
 
     private String userMessage;
     private String uri;
+    private List<Field> fields;
+    
+    
+    @Getter
+    @Builder
+    public static class Field {
+    	private String name;
+    	private String userMessage;
+    }
     
 }
