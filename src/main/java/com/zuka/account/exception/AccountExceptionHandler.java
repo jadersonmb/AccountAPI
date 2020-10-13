@@ -1,16 +1,23 @@
 package com.zuka.account.exception;
 
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 @ControllerAdvice
 @Component
@@ -22,10 +29,45 @@ public class AccountExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
 	public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		String messageUser = this.messageSource.getMessage("invalid_message", null, LocaleContextHolder.getLocale());
-		Problem problem = createProblemBuild(HttpStatus.BAD_REQUEST, ProblemType.USER_NOT_FOUND.getUri(),
-				ProblemType.USER_NOT_FOUND.getTitle(), messageUser).build();
+    	Throwable rootCause = ExceptionUtils.getRootCause(ex);
+    	
+    	if(rootCause instanceof InvalidFormatException) {
+    		return handleInvalidFormatException((InvalidFormatException)rootCause, headers, status, request);
+    	}
+    	
+    	ProblemType problemType = ProblemType.INVALID_BODY;
+		String messageUser = this.messageSource.getMessage(problemType.getMessageSource(), null,
+				LocaleContextHolder.getLocale());
+    	Problem problem = createProblemBuild(HttpStatus.BAD_REQUEST, problemType.getUri(),
+    			problemType.getTitle(), messageUser).build();
 		return handleExceptionInternal(ex, problem, headers, HttpStatus.BAD_REQUEST, request);
+	}
+    
+    
+    
+    private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException rootCause, HttpHeaders headers,
+			HttpStatus status, WebRequest request) {
+    	String path = rootCause.getPath().stream()
+    			.map(ref -> ref.getFieldName())
+    			.collect(Collectors.joining("."));
+    	
+    	ProblemType problemType = ProblemType.INVALID_BODY_PARAM;
+    	String messageDetails = messageSource.getMessage(problemType.getMessageSource(),
+				new Object[] {path, rootCause.getValue(), rootCause.getTargetType().getSimpleName()}, LocaleContextHolder.getLocale());
+    	Problem problem = createProblemBuild(status, problemType.getUri(), problemType.getTitle(), messageDetails)
+    				.build();
+		return handleExceptionInternal(rootCause, problem, headers, status, request);
+	}
+
+
+	@ExceptionHandler({ DataIntegrityViolationException.class } )
+	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+		ProblemType problemType = ProblemType.INVALID_VALUE_LONG_DATABASE;
+		String messageUser = this.messageSource.getMessage(problemType.getMessageSource(), null,
+				LocaleContextHolder.getLocale());
+		Problem problem = createProblemBuild(HttpStatus.BAD_REQUEST, problemType.getUri(),
+				problemType.getTitle(), messageUser).build();
+		return handleExceptionInternal(ex, problem,  new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 		
     private Problem.ProblemBuilder createProblemBuild (HttpStatus status, String type, String title, String detail){
