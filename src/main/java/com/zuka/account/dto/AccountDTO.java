@@ -6,8 +6,6 @@ import java.util.UUID;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import com.zuka.account.enums.Sex;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +27,6 @@ public class AccountDTO implements Serializable {
     private UUID id;
     @NotBlank
     private String name;
-    @CPF
     @NotBlank
     private String cpf;
     private Sex sex;
