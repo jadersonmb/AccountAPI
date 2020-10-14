@@ -62,10 +62,14 @@ public class Account implements Serializable {
 	
 	@Column(name = "cell", nullable = false)
 	private String cellPhone;
-
+	
+	@Column(name = "email")
+	private String email;
+	
 	@CreationTimestamp
 	@Column(name = "created", nullable = false)
 	private LocalDateTime created;
+	
 	
 	@Embedded
 	private Address address;

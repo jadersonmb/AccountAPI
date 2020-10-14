@@ -3,7 +3,10 @@ package com.zuka.account.dto;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.zuka.account.enums.Sex;
 
@@ -24,13 +27,16 @@ public class AccountDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private UUID id;
-    @NotNull
+    @NotBlank
     private String name;
-    @NotNull
+    @CPF
+    @NotBlank
     private String cpf;
     private Sex sex;
-    @NotNull
+    @NotBlank
     private String cellPhone;
+    @Email
+    private String email;
     private AddressDTO address;
 
     public AccountDTO(UUID id){
