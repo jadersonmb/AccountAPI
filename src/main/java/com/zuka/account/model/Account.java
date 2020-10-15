@@ -54,7 +54,7 @@ public class Account implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@Column(name = "cpf", nullable = false, length = 11)
+	@Column(name = "cpf", nullable = false)
 	private String cpf;
 	
 	@Enumerated(EnumType.STRING)

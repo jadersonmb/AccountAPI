@@ -69,9 +69,9 @@ public class AccountResource implements Serializable {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody AccountDTO accountDTO) {
-        AccountDTO accountSaveDTO = accountService.findById(id);
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody AccountDTO accountDTO) {
+        AccountDTO accountSaveDTO = accountService.findById(accountDTO.getId());
         if(Objects.nonNull(accountSaveDTO.getId())) {
             BeanUtils.copyProperties(accountDTO, accountSaveDTO, "id");
             accountService.save(accountSaveDTO);
