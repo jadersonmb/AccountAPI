@@ -4,24 +4,30 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-API account que tem os seguintes endpoits.
+API account excist the endpoints.
 
-  - Save
+  - GET
+  - POST
+  - PUT
   - Delete
-  - DeleteAll
-  - FindById
-  - ListAll
+  - DeleteAll/{UUIDS}
   
   # New Features!
 
-  - Implementar as validações.
-  - Implementar as regras de negocios.
+  - Implements many validations.
+  - Implements bussines roles.
   
   You can also:
-  - criar o docker.file banco postgresql
+  - Create the docker.file to basedados postgresql [X].
+  - Create the CI with docker.
   
 ### Tech
   * [Java] - Backend with Java 11
+  * [Docker] - 19.03.13
+  * [PostgreSQL] - 1.10
+  * [Maven] - 3.6.3
+  * [H2] - 1.4.200
+  * [MapStruct] - 1.4.0.Final
 
 ### Installation
 
@@ -34,7 +40,23 @@ Maven
 Lombok
 PostgreSQL
 H2
+Docker
 ```
+## Dock
+
+```sh
+compile the project before.
+mvn clean install -X
+```
+
+```sh
+docker build -t account .
+```
+
+```sh
+docker-compose up
+```
+
 # AccountAPI Swagger-ui
 ```sh
 http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
