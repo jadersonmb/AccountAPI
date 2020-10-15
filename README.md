@@ -31,11 +31,11 @@ API account excist the endpoints.
 
 ### Installation
 
-[Java](https://www.java.com/en/download/) v11+ to run.
-[Docker](https://docs.docker.com/docker-for-windows/install/) 19.03.13+ to run.
-[PostgreSQL](https://www.postgresql.org/download/) v1.10+ to run.
-[Maven](https://maven.apache.org/download.cgi?Preferred=ftp://apache.cs.utah.edu/apache.org/) v11+ to run.
-[Lombok](https://projectlombok.org/download) 1.18.12+ to run.
+*[Java](https://www.java.com/en/download/) v11+ to run.
+*[Docker](https://docs.docker.com/docker-for-windows/install/) 19.03.13+ to run.
+*[PostgreSQL](https://www.postgresql.org/download/) v1.10+ to run.
+*[Maven](https://maven.apache.org/download.cgi?Preferred=ftp://apache.cs.utah.edu/apache.org/) v11+ to run.
+*[Lombok](https://projectlombok.org/download) 1.18.12+ to run.
 
 Install the dependencies and devDependencies and start the server.
 
