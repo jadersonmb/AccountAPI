@@ -9,8 +9,8 @@ API account excist the endpoints.
   - GET
   - POST
   - PUT
-  - Delete
-  - DeleteAll/{UUIDS}
+  - DELETE
+  - DELETEALL/{UUIDS}
   
   # New Features!
 
