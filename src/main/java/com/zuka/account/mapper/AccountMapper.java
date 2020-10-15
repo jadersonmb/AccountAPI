@@ -7,7 +7,8 @@ import com.zuka.account.model.Account;
 
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
+	
+	 AccountDTO toAccountDTO(Account account);
+	 Account toAccount(AccountDTO accoutDTO);
 
-    AccountDTO toAccountDTO(Account account);
-    Account toAccount(AccountDTO accoutDTO);
 }

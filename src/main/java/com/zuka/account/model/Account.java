@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.zuka.account.enums.Sex;
 
@@ -67,9 +68,12 @@ public class Account implements Serializable {
 	private String email;
 	
 	@CreationTimestamp
-	@Column(name = "created", nullable = false)
+	@Column(name = "created")
 	private LocalDateTime created;
 	
+	@UpdateTimestamp
+	@Column(name = "updated")
+	private LocalDateTime updated;
 	
 	@Embedded
 	private Address address;

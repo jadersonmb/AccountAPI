@@ -37,8 +37,10 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	private void BusinessRulesSave(AccountDTO accountDTO) throws AccountException {
-		NotSaveCPFDuplicate(accountDTO);
-		NotSaveCellPhoneDuplicate(accountDTO);
+		if(Objects.isNull(accountDTO.getId())) {
+			NotSaveCPFDuplicate(accountDTO);
+			NotSaveCellPhoneDuplicate(accountDTO);
+		}
 	}
 
 	private void NotSaveCellPhoneDuplicate(AccountDTO accountDTO) {
