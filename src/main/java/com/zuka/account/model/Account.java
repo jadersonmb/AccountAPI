@@ -1,7 +1,7 @@
 package com.zuka.account.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -69,11 +69,11 @@ public class Account implements Serializable {
 	
 	@CreationTimestamp
 	@Column(name = "created")
-	private LocalDateTime created;
+	private OffsetDateTime created;
 	
 	@UpdateTimestamp
 	@Column(name = "updated")
-	private LocalDateTime updated;
+	private OffsetDateTime updated;
 	
 	@Embedded
 	private Address address;

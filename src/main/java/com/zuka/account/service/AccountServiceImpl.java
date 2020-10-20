@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zuka.account.dto.AccountDTO;
 import com.zuka.account.exception.AccountException;
@@ -63,6 +64,7 @@ public class AccountServiceImpl implements AccountService {
 		};
 	}
 
+	@Transactional
 	@Override
 	public AccountDTO save(AccountDTO accountDTO) throws AccountException {
 		BusinessRulesSave(accountDTO);
@@ -76,11 +78,13 @@ public class AccountServiceImpl implements AccountService {
 		return accountRepository.findAll(AccountSpec.searchDesc(filter), pageable).map(mapper::toAccountDTO);
 	}
 
+	@Transactional
 	@Override
 	public void delete(AccountDTO accountDTO) throws AccountException {
 		accountRepository.delete(mapper.toAccount(accountDTO));
 	}
 
+	@Transactional
 	@Override
 	public void deleteList(List<UUID> ids) throws AccountException {
 		ids.forEach(obj -> delete(findById(obj)));
