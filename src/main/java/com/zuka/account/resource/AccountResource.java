@@ -8,6 +8,8 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +38,7 @@ public class AccountResource implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private AccountService accountService;
+    private final Logger log = LoggerFactory.getLogger(AccountResource.class);
 
     @Autowired
     private AccountResource (AccountService accountService){
@@ -44,12 +47,16 @@ public class AccountResource implements Serializable {
 
     @GetMapping
     public ResponseEntity<?> listAll(Pageable pageable, AccountDTO filter) {
+    	log.debug("REST request to get all Account");
+    	
         Page<AccountDTO> listAllAccountDTO = accountService.listAll(pageable, filter);
         return ResponseEntity.ok().body(listAllAccountDTO);
     }
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody @Valid AccountDTO accountDTO) {
+    	log.debug("REST request to save Account : {}", accountDTO);
+    	
         AccountDTO accountReturnDTO = accountService.save(accountDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(accountReturnDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(accountReturnDTO);
@@ -58,6 +65,8 @@ public class AccountResource implements Serializable {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> delete(@PathVariable UUID id) {
+    	log.debug("REST request to get Account : {}", id);
+    	
         AccountDTO accountDTO = accountService.findById(id);
         accountService.delete(accountDTO);
         return ResponseEntity.ok().build();
@@ -65,12 +74,16 @@ public class AccountResource implements Serializable {
 
     @RequestMapping(value = "/deleteList/{ids}", method=RequestMethod.DELETE)
     public ResponseEntity<?> deleteList(@PathVariable List<UUID> ids) {
+    	log.debug("REST request to delete Account : {}", ids);
+    	
         accountService.deleteList(ids);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody AccountDTO accountDTO) {
+    	log.debug("REST request to update Account : {}", accountDTO);
+    	
         AccountDTO accountSaveDTO = accountService.findById(accountDTO.getId());
         if(Objects.nonNull(accountSaveDTO.getId())) {
             BeanUtils.copyProperties(accountDTO, accountSaveDTO, "id");
