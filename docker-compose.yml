@@ -9,6 +9,6 @@ services:
  docker-postgres:
     image: postgres:10.4
     environment:
-      - POSTGRES_DB=db
+      - POSTGRES_DB=db_account
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

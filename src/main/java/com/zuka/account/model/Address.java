@@ -24,18 +24,23 @@ public class Address implements Serializable {
 	
 	@Column(name = "postalCode")
 	private String postalCode;
+	
 	@Column(name = "address", length = 150)
 	private String address;
+	
 	@Column(name = "district", length = 45)
 	private String district;
+	
 	@Column(name = "city", length = 100)
 	private String city;
+	
 	@Column(name = "state")
 	private String state;
+	
 	@Column(name = "number")
 	private Integer number;
+	
 	@Column(name = "complement")
 	private String complement;
-	
 	
 }
