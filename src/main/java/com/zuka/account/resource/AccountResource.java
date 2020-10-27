@@ -33,7 +33,7 @@ import com.zuka.account.exception.Problem;
 import com.zuka.account.service.AccountService;
 
 @RestController()
-@RequestMapping(value = "/api/account")
+@RequestMapping(value = "/account")
 public class AccountResource implements Serializable {
     private static final long serialVersionUID = 1L;
 
